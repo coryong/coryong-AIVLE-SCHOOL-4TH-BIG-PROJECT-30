@@ -8,7 +8,7 @@ class UserTable(models.Model):
         db_table = 'userTable'
 
 class PostTable(models.Model):
-    user = models.ForeignKey(UserTable, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserTable, on_delete=models.SET_NULL, null=True, blank=True)
     title = models.CharField(max_length=255)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -16,3 +16,15 @@ class PostTable(models.Model):
 
     class Meta:
         db_table = 'postTable'
+        
+# class PostTable(models.Model):
+#     user = models.ForeignKey(UserTable, on_delete=models.CASCADE)
+#     title = models.CharField(max_length=255)
+#     content = models.TextField()
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+
+#     class Meta:
+#         db_table = 'postTable'
+        
+        
