@@ -1,0 +1,205 @@
+{% load static %}
+<title> Signlaguage </title>
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'languagechat/style.css' %}?after">
+ 
+{% endblock %}
+ 
+<body>
+    <header id="header">
+        <div class= "inner">
+            <a href="" class="logo">
+                <strong>KT Aivle 30조 </strong>
+            </a>
+
+            <nav id="nav">
+                <a href="{% url 'home' %}">Home</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'common:logout' %}">{{ user.username }} (Logout)</a>
+                {% else %}
+                <a href="{% url 'common:login' %}">Login</a>
+                {% endif %}
+                {% if not user.is_authenticated %}
+                <a href="/signup/">Signup</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+</body>
+
+
+
+<form id="uploadForm" action="chat" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <span id="file-module-0">
+    <div class="all">
+        <fieldset>
+            <legend><h1>파일 업로드</h1></legend>
+            <div class="upload-box">
+                <div id="drop-file" class="drag-file">
+                  <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image">
+                  <p class="message">Drag files to upload</p>
+                
+                  <img src="" alt="미리보기 이미지" class="preview">
+                </div>
+                
+            </div>
+            <div class="chooseFile"> <label class="file-label" for="chooseFile">Choose File</label></div>
+            <input class="file" name="files" id="chooseFile"
+            type="file"
+            onchange="dropFile.handleFiles(this.files)"
+            accept="image/png, image/jpeg, image/gif" multiple>
+ 
+        </fieldset>
+        <fieldset>
+            <legend><h1>Answer</h1></legend>
+            <div class="my-3 p-3">
+            <p class="lead">chatGPT의 답변</p>
+            <span id="question" name="question">{{ question }}</span>
+            <br>
+            <span id="result" name="result">{{ result }}</span>
+            <div class="container-fluid py-3">
+              <div class="h-100 p-5 text-bg-dark rounded-3">
+              </div>
+            </div>
+        </div>
+        </fieldset>
+    </div>
+    </span>
+    
+    <div><input type="submit" value="Request to ChatGPT"></div>
+</form>
+<script>
+    function DropFile(dropAreaId, fileListId) {
+    let dropArea = document.getElementById(dropAreaId);
+    let fileList = document.getElementById(fileListId);
+   
+    // 기존이벤트 막기
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+   
+    // 하이라이팅
+    function highlight(e) {
+        preventDefaults(e);
+        dropArea.classList.add("highlight");
+    }
+   
+    function unhighlight(e) {
+        preventDefaults(e);
+        dropArea.classList.remove("highlight");
+    }
+   
+    // 파일 업로드(드래그앤드롭)
+    function handleDrop(e) {
+        unhighlight(e);
+        let dt = e.dataTransfer;
+        let files = dt.files;
+
+        handleFiles(files);
+        const inputElement = document.getElementById('chooseFile');
+        if (inputElement) {
+            inputElement.files = files; // 여기서 드롭된 파일들을 input 요소의 files 속성에 할당
+        }
+        const fileList = document.getElementById(fileListId);
+        if (fileList) {
+        fileList.scrollTo({ top: fileList.scrollHeight });
+        }
+    }
+   
+    function handleFiles(files) {
+        files = [...files];
+        // 이미지 아이콘 제거
+        let fileIcon = document.querySelector('.image');
+        if (fileIcon) {
+        fileIcon.parentNode.removeChild(fileIcon);
+        }
+        // "Drag files to upload" 메시지 제거
+        let uploadMessage = document.querySelector('.message');
+        if (uploadMessage) {
+            uploadMessage.parentNode.removeChild(uploadMessage);
+        }
+        const readFile = (file) => {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onloadend = () => resolve(reader.result);
+            });
+        };
+    
+        const addImagesSequentially = async () => {
+            for (const file of files) {
+                const dataUrl = await readFile(file);
+                const img = document.createElement('img');
+                img.src = dataUrl;
+                img.style.width = '100px';
+                img.style.height = '100px';
+                img.style.marginRight = '10px';
+                dropArea.style.display = 'flex';
+                dropArea.style.flexDirection = 'row'; // 가로 방향으로 배치
+            
+                dropArea.appendChild(img);
+            }
+        };
+    
+        addImagesSequentially();
+    }
+   
+    function previewFile(file) {
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = function () {
+            let img = document.createElement('img'); //새로운 이미지 요소를 생성합니다.
+            img.src = reader.result; //이미지의 src 속성을 데이터 URL로 설정합니다.
+            img.style.width = '100px'; //이미지 크기 조절을 원하시면 해당 코드를 수정하실 수 있습니다.
+            img.style.height = '100px';
+            img.style.marginRight = '10px'; //이미지 간 간격을 원하시면 해당 코드를 수정하실 수 있습니다.
+            dropArea.style.display = 'flex';
+            dropArea.style.flexDirection = 'row'; // 가로 방향으로 배치
+            dropArea.appendChild(img); //미리보기 박스에 새 이미지를 추가합니다.
+        };
+    }
+   
+    // 이미지 미리보기
+    function renderFile(file) {
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = function () {
+        let img = dropArea.getElementsByClassName("preview")[0];
+        img.src = reader.result;
+        img.style.display = "block";
+        };
+    }
+   
+    dropArea.addEventListener("dragenter", highlight, false);
+    dropArea.addEventListener("dragover", highlight, false);
+    dropArea.addEventListener("dragleave", unhighlight, false);
+    dropArea.addEventListener("drop", handleDrop, false);
+   
+    return {
+        handleFiles
+    };
+    }
+   
+    const dropFile = new DropFile("drop-file", "files");
+    document.querySelector('input[type="submit"]').addEventListener('click', function() {
+        
+        let dropArea = document.getElementById('drop-file');
+        let images = dropArea.getElementsByTagName('img');
+    
+        let imgSrcArray = [];
+        for (let i = 0; i < images.length; i++) {
+            let imageSrc = images[i].src;
+            // 이미지 소스가 비어있지 않으면 이미지 URL을 배열에 추가합니다.
+            if (imageSrc && imageSrc.trim() !== '') {
+                imgSrcArray.push(imageSrc);
+            }
+        }
+    
+        // imgSrcArray를 출력하거나 원하는 곳에 데이터를 넣는 방법으로 바꿔주세요.
+        console.log(imgSrcArray);
+        // 또는 다른 로직에 따라 필요한 곳에 데이터를 추가할 수 있어요.
+    });
+    
+</script>

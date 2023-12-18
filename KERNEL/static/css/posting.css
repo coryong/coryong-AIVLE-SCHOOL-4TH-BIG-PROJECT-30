@@ -1,0 +1,46 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fff;
+    color: #333;
+}
+
+
+
+/*header*/
+#header {
+    background-color: #78E150;
+    color: #fff;
+    padding: 10px;
+}
+#header .inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+}
+
+.logo {
+    text-decoration: none;
+    color: #333;
+}
+
+#nav {
+    display: flex;
+}
+
+#nav a {
+    text-decoration: none;
+    color: #333;
+    margin-left: 15px; 
+}
+
+
+#Post header h1 {
+    text-align: center; /* 중앙 정렬 */
+    margin-bottom: 80px; /* 제목과 내용 간 간격 조절 */
+}
+
+
+
+.write > div {
+    margin-bottom: 80px; /* 원하는 간격으로 조절 가능 */
+}

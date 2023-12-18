@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Posting</title>
+    <link rel="stylesheet" href="{% static 'css/posting.css' %}">
+</head>
+<body>
+    <header id="header">
+        <div class= "inner">
+            <a href="" class="logo">
+                <strong>KT Aivle 30조 </strong>
+            </a>
+
+            <nav id="nav">
+                <a href="{% url 'home' %}">Home</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'common:logout' %}">{{ user.username }} (Logout)</a>
+                {% else %}
+                <a href="{% url 'common:login' %}">Login</a>
+                {% endif %}
+                {% if not user.is_authenticated %}
+                <a href="/signup/">Signup</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <section id = "Post">
+        <div class="inner">
+            <header><h1>What is a sign language?</h1></header>
+        </div>
+
+        <div class="write">
+            <div>
+                <h3>수어</h3>
+                <img src="{% static 'images/img_1.png' %}" alt="Image1">
+                <p>
+                    수어는 청각 장애인들이 의사 소통을 위해 사용하는 언어로, 주로 손과 팔의 움직임, 표정, 몸짓 등을 이용하여 정보를 전달합니다. 수어는 많은 국가와 문화에서 발전하여 왔으며, 각 나라나 지역에 따라 다양한 형태가 존재합니다.
+                </p>
+                <p>
+                    수어는 말의 발음이나 소리가 아닌 시각적인 수화로 의사소통을 하는데, 이는 언어의 기본적인 특성과 문법을 갖추고 있습니다. 수어는 말하는 언어와는 다르게 언어의 규칙이 손과 팔의 움직임, 표정, 시선 등으로 전달되기 때문에, 수어를 사용하는 사람들은 이를 통해 의사소통의 풍부한 경험을 나눌 수 있습니다.
+                </p>
+                <p>
+                    수어는 일반적으로 청각 장애인들뿐만 아니라, 언어적으로 다양한 문화적 배경을 가진 사람들 간에 의사소통을 원활하게 할 수 있도록 도와줍니다. 또한, 수어는 언어의 한 형태로서 학습 및 교육이 가능하며, 많은 국가에서는 수어를 공식적으로 인정하고 지원하는 제도를 마련하고 있습니다.
+                </p>
+            </div>
+
+            <div>
+                
+                <h3>알파벳 수어</h3>
+                <img src="{% static 'images/sign_language.jpg' %}" alt="Image2">
+                <p>알파벳 수어는 수화 언어를 사용하는 청각 장애인들이 알파벳을 나타내기 위해 사용하는 수어의 형태입니다. 각 알파벳에 대응하는 독특한 수화 동작이 있어, 수화를 통해 알파벳을 표현하고 전달할 수 있습니다</p>
+                <p>1. 수화 동작: 각 알파벳에 대응하는 수화 동작은 손 모양, 손의 위치, 움직임 등을 포함합니다. 예를 들어, 'A'는 손가락을 펴서 손을 수평으로 올리는 동작일 수 있습니다.</p>
+                <p>2. 시각적 특성: 알파벳 수어는 시각적인 특성을 강조합니다. 각 알파벳은 손의 움직임이나 형태 등으로 나타내어지기 때문에, 보는 사람에게 알파벳을 전달하는 데 중점을 둡니다.</p>
+                <p>3. 국가 또는 지역마다 차이: 각 나라나 지역의 수어는 문화적인 차이와 함께 발전해 왔기 때문에, 알파벳 수어도 국가나 지역에 따라 차이가 있을 수 있습니다.</p>
+                <p>4. 효율적인 의사 소통 수단: 알파벳 수어는 청각 장애인들 간에 빠르고 효율적인 의사 소통 수단으로 사용됩니다. 특히 글자나 단어를 철자할 때 사용되며, 수어를 통해 쉽게 정보를 교환할 수 있습니다.</p>
+                <p>알파벳 수어는 많은 사람들에게 의사 소통의 기회를 제공하고, 수어를 통한 글자나 단어의 표현은 수어 커뮤니티에서 일상적으로 사용되고 있습니다.</p>
+            </div>
+
+        </div>
+    </section>
+
+
+</body>
+</html>

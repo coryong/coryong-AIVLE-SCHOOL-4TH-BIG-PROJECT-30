@@ -1,0 +1,61 @@
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'gtp/style.css' %}">
+{% endblock %}
+
+
+<body>
+    <header id="header">
+        <div class= "inner">
+            <a href="" class="logo">
+                <strong>KT Aivle 30조 </strong>
+            </a>
+
+            <nav id="nav">
+                <a href="{% url 'home' %}">Home</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'common:logout' %}">{{ user.username }} (Logout)</a>
+                {% else %}
+                <a href="{% url 'common:login' %}">Login</a>
+                {% endif %}
+                {% if not user.is_authenticated %}
+                <a href="/signup/">Signup</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+</body>
+
+
+<div class="container">
+    <a href="/">Home</a>
+    <!-- 새로운 대화 내용 표시 영역 -->
+    <div id="chat-display">
+        {% for chat in chat_history %}
+            <div class="chat-entry">
+                <strong>질문:</strong> {{ chat.question }}
+                <br>
+                <strong>답변:</strong> {{ chat.answer }}
+            </div>
+        {% endfor %}
+    </div>
+    <form action="chat" method="post" entype="application/x-www-form-urlencoded">
+        {% csrf_token %}
+        <div id="question-module">
+            <label>chatgtp에게 요청하기</label>
+            <textarea id="question" name="question"></textarea>
+        </div>
+        <div><button id="text-button" type="submit">질문</button></div>
+    </form>
+</div>
+
+<!-- JavaScript -->
+<script>
+    function updateTextarea() {
+        var historyContent = document.getElementById('chat-history').innerText;
+        var questionTextarea = document.getElementById('chat-display');
+        questionTextarea.value = historyContent;
+    }
+
+    window.onload = updateTextarea;
+</script>

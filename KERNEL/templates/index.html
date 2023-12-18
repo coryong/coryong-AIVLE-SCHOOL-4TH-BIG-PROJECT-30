@@ -1,0 +1,108 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Aivle_30</title>
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <link rel="stylesheet" href="static/css/main.css">
+</head>
+
+<body>
+    <header id="header">
+        <div class= "inner">
+            <a href="" class="logo">
+                <strong>KT Aivle 30조 </strong>
+            </a>
+
+            <nav id="nav">
+                <a href="/">Home</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'common:logout' %}">{{ user.username }} (Logout)</a>
+                {% else %}
+                <a href="{% url 'common:login' %}">Login</a>
+                {% endif %}
+                {% if not user.is_authenticated %}
+                <a href="/signup/">Signup</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <section id = "banner">
+        <div class="inner">
+            <header><h1>수어 번역 서비스</h1></header>
+        </div>
+
+        <div class="flex">
+            <div>
+                <span class="icon icon1"><i class="fas fa-book"></i></span>
+                <h3>수어 배우기</h3>
+                <p>수어 관련 내용 학습하기</p>
+            </div>
+
+            <div>
+                <span class="icon icon2"><i class="fas fa-hand-holding-heart"></i></span>
+                <h3>수어 번역</h3>
+                <p>사진을 첨부해서 수어를 번역해보세요</p>
+            </div>
+            <div>
+                <span class="icon icon3"><i class="fas fa-comments"></i></span>
+                <h3>수어 gpt</h3>
+                <p>수어 이미지를 첨부해서 gpt와 대화해보세요</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section id="three" class="wrapper align-center">
+        <div class="inner">
+            <div class="flex flex-2">
+                <article>
+                    <div class="image round">
+                        <img src="{% static '/images/image1.jpg' %}" alt="Pic 01" width="200" height="200">
+
+                    </div>
+
+                    <header>
+                        <h3>What is sign language</h3>
+                        <p>수어에 대한 기본 지식과 수어를 학습해 보세요</p>
+                        <footer><a href="/posting/" class='button'>posting</a></footer>
+                    </header>
+                </article>
+
+                <article>
+                    <div class="image round">
+                        <img src="{% static '/images/image3.jpg' %}" alt="Pic 01" width="200" height="200">
+                    </div>
+
+                    <header>
+                        <h3>Chat gpt</h3>
+                        <p>gpt 에게 요청하기</p>
+                        <footer><a href="/chatgpt/" class='button'>gpt</a></footer>
+                    </header>
+                </article>
+
+                <article>
+                    <div class="image round">
+                        <img src="{% static '/images/image2.jpg' %}" alt="Pic 01" width="200" height="200">
+                    </div>
+
+                    <header>
+                        <h3>signlanguage to gpt</h3>
+                        <p>수어 이미지를 활용하여 gpt와 대화해보기</p>
+                        <footer><a href="/signlanguagetochatgpt/" class='button'>signlanguage</a></footer>
+                    </header>
+                </article>
+
+
+            </div>
+        </div>
+    </section>
+        
+</body>
+</html>
+
+
+

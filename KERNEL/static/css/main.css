@@ -1,0 +1,93 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fff;
+    color: #333;
+}
+
+/*header*/
+#header {
+    background-color: #78E150;
+    color: #fff;
+    padding: 10px;
+}
+#header .inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 세로 정렬을 위해 추가 */
+}
+
+.logo {
+    text-decoration: none;
+    color: #333;
+}
+
+#nav {
+    display: flex;
+}
+
+
+/*banner*/
+#nav a {
+    color: #fff;
+    margin-right: 15px;
+    margin-left: 15px; 
+    text-decoration: none;
+}
+
+#banner {
+    background-color: #ddd;
+    padding: 20px;
+    text-align: center;
+    width : 100%;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.flex div {
+    text-align: center;
+    padding: 20px;
+    flex: 1; 
+    width: 60%;
+    margin: 10px auto;
+}
+
+.icon {
+    display: block; 
+    margin: 0 auto; 
+}
+
+
+/* Flex 컨테이너에 대한 스타일 */
+.flex-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px; /* 간격을 줄임 */
+    margin: 10px 50px; /* 좌우 여백을 줄임 */
+}
+
+/* 각 article에 대한 스타일 조정 */
+article {
+    text-align: center;
+    width: 30%; /* 너비를 줄임 */
+    margin: 30px; /* 좌우 마진을 조절 */
+}
+
+/* 버튼 스타일 */
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    background-color: #4CAF50; /* 초록색 배경색 */
+    color: #fff; /* 흰색 텍스트 색상 */
+    border-radius: 5px; /* 둥근 사각형으로 처리 */
+}
+
+/* 버튼 호버 효과 (옵션) */
+.button:hover {
+    background-color: #45a049; /* 마우스 호버시 어두운 초록색으로 변경 */
+}
