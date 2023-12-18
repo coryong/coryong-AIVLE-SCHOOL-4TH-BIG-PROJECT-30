@@ -19,9 +19,6 @@ import os
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=1clo75uwio(zd5zt29$)h!356-@1!*ou=1)6yne60p64daj+5'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -40,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'chatgpt',
     'signlanguagetochatgpt',
-    'posting',
-    'signup',    
+    'signup',
+    'post',    
 ]
 
 MIDDLEWARE = [
@@ -78,12 +75,11 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+import my_settings
+
+DATABASES = my_settings.DATABASES
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = my_settings.SECRET_KEY
 
 
 # Password validation
@@ -125,7 +121,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'posting', 'static'),
     BASE_DIR / 'signup' / 'static',
     BASE_DIR / 'chatgpt' / 'static',
     BASE_DIR / 'signlanguagetochatgpt' / 'static',    

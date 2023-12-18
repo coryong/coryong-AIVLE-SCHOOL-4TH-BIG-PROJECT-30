@@ -28,9 +28,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('chatgpt/',include('chatgpt.urls')),
     path('signlanguagetochatgpt/',include('signlanguagetochatgpt.urls')),
-    path('posting/', include('posting.urls')),
     path('common/',include('common.urls')),
     path('signup/', include('signup.urls')),
+    path('post/', include('post.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 from django.conf import settings
