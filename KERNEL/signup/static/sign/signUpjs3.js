@@ -68,16 +68,15 @@ function checkCompletion(){
 // 가입부분 체크
 
 function signUpCheck(){
-
- let email = document.getElementById("email").value
- let name = document.getElementById("name").value
- let password = document.getElementById("password").value
- let passwordCheck = document.getElementById("passwordCheck").value
- let area = document.getElementById("area").value
- let gender_man = document.getElementById("gender_man").checked
- let gender_woman = document.getElementById("gender_woman").checked
- let check = true;
-
+  let email = document.getElementById("email").value;
+  let name = document.getElementById("name").value;
+  let password = document.getElementById("password").value;
+  let passwordCheck = document.getElementById("passwordCheck").value;
+  let area = document.getElementById("area").value;
+  let gender_man = document.getElementById("gender_man").checked;
+  let gender_woman = document.getElementById("gender_woman").checked;
+  let check = true;
+  
  // 이메일확인
  if(email.includes('@')){
    let emailId = email.split('@')[0]
@@ -150,12 +149,8 @@ function signUpCheck(){
  location.href = "http://127.0.0.1:8000/"; // 원래 페이지로 이동
  
  if(check){
-   document.getElementById("emailError").innerHTML=""
-   document.getElementById("nameError").innerHTML=""
-   document.getElementById("passwordError").innerHTML=""
-   document.getElementById("passwordCheckError").innerHTML=""
-   document.getElementById("areaError").innerHTML=""
-   document.getElementById("genderError").innerHTML=""
+  document.getElementById("signUpForm").submit(); // HTML 폼 제출
+ }
    
    //비동기 처리이벤트
    setTimeout(function() {
