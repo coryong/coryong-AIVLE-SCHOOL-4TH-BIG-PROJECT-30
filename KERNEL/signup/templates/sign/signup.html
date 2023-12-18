@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,6 @@
 <body>
     <div class="wrapper">
         <div class="title"><h1 style="font-size: 21px;">회원가입</h1></div>
-        
         <form id="signUpForm" method="post" action="{% url 'signup_view' %}">
             {% csrf_token %}
             <div class="id">
@@ -21,87 +21,34 @@
                 {{ form.name }}
                 <div id="nameError" class="error"></div>
             </div>
-        <div class="password">
-            <h3 class="list">비밀번호<span id="emailError"></span></h3>
-            <input id="password" type="password" placeholder="비밀번호를 입력해 주세요.">
-            <div id="passwordError" class="error"></div>
-        </div>
-        <div class="passwordCheck">
-            <h3 class="list">비밀번호 확인<span id="emailError"></span></h3>
-            <input id="passwordCheck" type="password" placeholder="비밀번호를 다시 입력해 주세요.">
-            <div id="passwordCheckError" class="error"></div>
-        </div>
-        <div class="phone">
-            <h3 class="list">전화번호<span id="emailError"></span></h3>
-            <input id="phone1" type="text" size="1" maxlength="3" oninput="changePhone1()"> -
-            <input id="phone2" type="text" size="3" maxlength="4" oninput="changePhone2()"> -
-            <input id="phone3" type="text" size="3" maxlength="4" oninput="changePhone3()">
-        </div>
-        <!-- 이메일 입력 -->
-        <div class="userInput">
-            <h3 class="list">이메일<span id="emailError"></span></h3>
-            <span class="emailInt" id="emailBox"> <input type="text" id="email" maxlength="20" class="check" > 
-               <span>   @ </span> 
-                  <!-- 이메일 택일 -->
-                  <select id="mail_Select">
-                     <option>이메일 선택</option>
-                     <option>naver.com</option>
-                     <option>gmail.com</option>
-                     <option>daum.net</option>
-                     <option>hanmail.net</option>
-                     <option>hotmail.com</option>
-                     <option>nate.com</option>
-                     <option>yahoo.co.kr</option>
-                     <option>empas.com</option>
-                     <option>freechal.com</option>
-                     <option>lycos.co.kr</option>
-                     <option>korea.com</option>
-                     <option>hanmir.com</option>
-                     <option>dreamwiz.com</option>
-                     <option>paran.com</option>
-                  </select>
-            </span>
-         </div>                
-        <div class="auth">
-            <div id="certificationNumber">000000</div>
-            <button disabled id="sendMessage" onclick="getToken()">인증번호 전송</button>
-        </div>
-
-        <div class="timer">
-            <div id="timeLimit">03:00</div>
-            <button disabled id="completion" onclick="checkCompletion()">인증확인</button>
-        </div>
-        <div class="area">
-            <select id="area">
-                <option selected disabled>지역을 선택하세요.</option>
-                <option>서울</option>
-                <option>인천</option>
-                <option>경기</option>
-                <option>대전</option>
-                <option>대구</option>
-                <option>광주</option>
-                <option>부산</option>
-                <option>전주</option>
-                <option>강원</option>
-                <option>충청</option>
-                <option>전라</option>
-                <option>경상</option>
-                <option>제주</option>
-            </select>
-            <div id="areaError" class="error"></div>
-        </div>
-        <div class="gender">
-            <input id="gender_man" type="radio" name="gender">남성  
-            <input id="gender_woman" type="radio" name="gender">여성
-            <div id="genderError" class="error"></div>
-        </div>
-        <div class="line">
-            <hr>
-        </div>
-        <div class="signUp">
-            <button type="button" id="signUpButton" onclick="signUpCheck()">가입하기</button>
-        </div>
-    </form>
-</div>
+            <div class="password">
+                <h3 class="list">비밀번호<span id="emailError"></span></h3>
+                {{ form.password }}
+                <div id="passwordError" class="error"></div>
+            </div>
+            <div class="phone">
+                <h3 class="list">전화번호<span id="emailError"></span></h3>
+                {{ form.phone }}
+            </div>
+            <div class="userInput">
+                <h3 class="list">이메일<span id="emailError"></span></h3>
+                {{ form.email }}
+            </div>
+            <div class="area">
+                <h3 class="list">지역<span id="emailError"></span></h3>
+                {{ form.area }}
+                <div id="areaError" class="error"></div>
+            </div>
+            <div class="gender">
+                <h3 class="list">성별<span id="emailError"></span></h3>
+                {{ form.gender }}
+                <div id="genderError" class="error"></div>
+            </div>
+            <div class="line"><hr></div>
+            <div class="signUp">
+                <button type="submit" id="signUpButton">가입하기</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

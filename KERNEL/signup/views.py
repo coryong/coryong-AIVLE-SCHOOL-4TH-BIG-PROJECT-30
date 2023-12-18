@@ -12,4 +12,4 @@ def signup_view(request):
     else:
         form = UserTableForm()
 
-    return render(request, 'signup/signup.html', {'form': form})
+    return render(request, 'sign/signup.html', {'form': form})

@@ -21,7 +21,7 @@ body {
    flex-direction: column;
 }
 
-input{
+input {
    border: 1px solid black;
    border-radius: 3px;
    line-height: 35px;
@@ -45,19 +45,8 @@ div {
    font-weight: 700;
    font-size: 1.5rem;
 }
-.id input {
-   width: 100%;
-}
 
-.name input {
-   width: 100%;
-}
-
-.password input {
-   width: 100%;
-}
-
-.passwordCheck input {
+.id input, .name input, .password input, .passwordCheck input {
    width: 100%;
 }
 
@@ -67,48 +56,8 @@ div {
    line-height: 35px;
 }
 
-#phone1 {
-   width: 18%;
-}
-
-#phone2 {
+#phone1, #phone2, #phone3 {
    width: 30%;
-}
-
-#phone3 {
-   width: 30%;
-}
-
-.auth {
-   display: flex;
-   justify-content: space-between;
-}
-
-.timer {
-   display: flex;
-   justify-content: space-between;
-}
-
-.auth div {
-   width: 30%;
-   text-align: center;
-   font-weight: 700;
-   font-size: 15px;
-}
-
-.auth button {
-   width: 70%;
-}
-
-.timer div {
-   width: 30%;
-   text-align: center;
-   font-weight: 700;
-   font-size: 15px;
-}
-
-.timer button {
-   width: 70%;
 }
 
 .area select {
@@ -122,17 +71,17 @@ div {
 
 .signUp button {
    width: 100%;
-   cursor:pointer;
+   cursor: pointer;
 }
 
-button{
+button {
    cursor: pointer;
    height: 30px;
 }
 
-.error{
+.error {
    font-size: 1px;
    height: 20px;
-   color:red;
+   color: red;
    font-weight: 700;
 }
