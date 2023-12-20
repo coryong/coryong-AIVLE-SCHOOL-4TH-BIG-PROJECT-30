@@ -7,16 +7,17 @@ const Header = () => {
     <StyledRoot>
       <img className="logo" src={logo} alt="" />
       <Menu>
-        <li>채용 공고</li>
-        <li>자기소개서</li>
-        <li>이력서</li>
-        <li>데이터랩</li>
-        <li>합격자소서</li>
-        <li>실무경험 채우기</li>
+        <li>나의 직업 가치관</li>
+        <li>일정관리</li>
+        <li>만다라트</li>
+        <li>2023트렌드</li>
+        <li>스터디그룹모집</li>
+        <li>추천채용</li>
       </Menu>
       <hr />
       <Login>로그인</Login>
-      <Service>기업서비스</Service>
+      <Service>마이페이지</Service>
+      <SignUp>회원가입</SignUp>
       <ChatImg src={chatIcon}></ChatImg>
     </StyledRoot>
   );
@@ -64,6 +65,13 @@ const ChatImg = styled.img`
   width: 2.5vw;
   height: 5vh;
   margin: 20px;
+`;
+
+const SignUp = styled.div`
+  margin: 20px;
+  color: #6e6e6e;
+  font-weight: bold;
+  cursor: pointer;
 `;
 
 const Service = styled.div`
