@@ -1,27 +1,8 @@
-import styled from 'styled-components'; //모듈 설치 필요
-import {NavLink} from 'react-router-dom';
-import {Outlet} from 'react-router-dom'; //모듈 설치 필요
+import React from 'react';
+import styled from 'styled-components';
+import { NavLink, useNavigate, Outlet } from 'react-router-dom'; // Outlet 추가
+import { useAuth } from '../context/AuthContext';
 
-
-const categories = [
-  {
-    name: 'home',
-    text: '홈'
-  },
-  {
-    name: 'login',
-    text: '로그인'
-  },
-  {
-    name: 'join',
-    text: '회원가입'
-  },
-  {
-    name: 'post',
-    text: '게시물'
-  }
-  
-];
 
 const CategoriesBlock = styled.div`
   display: flex;
@@ -52,18 +33,32 @@ const Category = styled(NavLink)`
 `;
 
 const Categories = () => {
-  return(
+  const { isLoggedIn, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/'); // 로그아웃 후 홈으로 이동
+  };
+
+  return (
     <div>
       <header>
         <CategoriesBlock>
-          {categories.map(c => (
-            <Category
-              key={c.name}
-              to={c.name==='home'?'/':`/${c.name}`}
-            >
-              {c.text}
-            </Category>
-          ))}
+          <Category to="/">홈</Category>
+          {!isLoggedIn && (
+            <>
+              <Category to="/login">로그인</Category>
+              <Category to="/join">회원가입</Category>
+            </>
+          )}
+          {isLoggedIn && (
+            <>
+              <Category to="/post">게시물</Category>
+              {/* 로그아웃 기능을 수행하는 Category 컴포넌트 */}
+              <Category as="div" onClick={handleLogout}>로그아웃</Category>
+            </>
+          )}
         </CategoriesBlock>
       </header>
       <main>
@@ -74,3 +69,6 @@ const Categories = () => {
 };
 
 export default Categories;
+
+
+

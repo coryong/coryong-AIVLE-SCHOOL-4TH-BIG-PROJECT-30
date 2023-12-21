@@ -1,5 +1,7 @@
+// src/pages/Login.js
 import React, { Component } from 'react';
-import { Navigate } from 'react-router-dom'; // Update import statement
+import { Navigate, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 class Login extends Component {
   constructor(props) {
@@ -7,43 +9,49 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
-      loggedIn: false,
+      error: '', // 오류 메시지 상태 추가
     };
   }
 
   handleInputChange = (e) => {
     const { name, value } = e.target;
-    this.setState({ [name]: value });
+    this.setState({ [name]: value, error: '' });
   };
 
-  handleLogin = () => {
+  handleSubmit = (e) => {
+    e.preventDefault();
     const { username, password } = this.state;
 
-    // Check your login logic here
-    if (username === 'aivle30' && password === '1234') {
-      // Set loggedIn to true if login is successful
-      this.setState({ loggedIn: true });
+    if (!username || !password) {
+      this.setState({ error: '모든 필드를 채워주세요.' });
+      return;
     }
 
-    console.log('로그인 시도:', { username, password });
+    // 로그인 시도 후 성공 시 홈으로 리디렉션
+    this.props.login(username, password, () => {
+      this.props.navigate('/'); // 여기에서 홈으로 이동
+    });
   };
 
   render() {
-    // Redirect to /home if loggedIn is true
-    if (this.state.loggedIn) {
+    const { isLoggedIn } = this.props;
+    const { username, password, error } = this.state;
+
+    if (isLoggedIn) {
       return <Navigate to="/" />;
     }
 
     return (
       <div>
         <h2>Login</h2>
-        <form>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        <form onSubmit={this.handleSubmit}>
           <label>
             Username:
             <input
               type="text"
               name="username"
-              value={this.state.username}
+              value={username}
               onChange={this.handleInputChange}
             />
           </label>
@@ -53,18 +61,21 @@ class Login extends Component {
             <input
               type="password"
               name="password"
-              value={this.state.password}
+              value={password}
               onChange={this.handleInputChange}
             />
           </label>
           <br />
-          <button type="button" onClick={this.handleLogin}>
-            Login
-          </button>
+          <button type="submit">Login</button>
         </form>
       </div>
     );
   }
 }
 
-export default Login;
+// Context 사용을 위한 HOC
+export default function LoginWithAuth(props) {
+  const navigate = useNavigate();
+  const auth = useAuth();
+  return <Login {...props} {...auth} navigate={navigate} />;
+}
