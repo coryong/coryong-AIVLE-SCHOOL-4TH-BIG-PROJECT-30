@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'; //설치 필요
 
+
+
 const Post = () => {
   const [posts, setPosts] = useState([]);
   const [newPost, setNewPost] = useState({ title: '', content: '' });
