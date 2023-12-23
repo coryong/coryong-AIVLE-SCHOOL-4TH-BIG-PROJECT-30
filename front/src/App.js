@@ -1,43 +1,34 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider, useAuth } from './context/AuthContext';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Join from './pages/Join';
-import Post from './pages/Post';
-import Categories from './components/Categories';
+import React from "react";
+import styled from "styled-components";
+import { BrowserRouter,Routes,Route } from "react-router-dom";
 
-// AuthRoutes 컴포넌트
-const AuthRoutes = () => {
-  const { isLoggedIn } = useAuth();
+import Sidebar from "./components/Sidebar";
+import Home from "./pages/Home";
+import MyList from "./pages/MyList";
+import LikedList from "./pages/LikedList";
+import Setting from "./pages/Setting";
+const Center = styled.div`
+  height: 92vh;
+  display: flex;
+  flex-direction: row;
+`
 
-  return (
-    <Routes>
-      <Route element={<Categories />}>
-        <Route path="/" element={<Home />} />
-        {isLoggedIn ? (
-          <>
-            <Route path="/post" element={<Post />} />
+class App extends React.Component {
+  render() {
+    return(
+      <BrowserRouter>
+        
+        <Center>
+          <Sidebar/>
+          <Routes>
             <Route path="/" element={<Home />} />
-          </>
-        ) : (
-          <>
-            <Route path="/login" element={<Login />} />
-            <Route path="/join" element={<Join />} />
-          </>
-        )}
-      </Route>
-    </Routes>
-  );
-};
-
-// App 컴포넌트
-const App = () => {
-  // Router 삭제
-  return (
-    <AuthProvider>
-      <AuthRoutes />
-    </AuthProvider>
-  );
-};
-
+            <Route path="/mylist" element={<MyList />} />
+            <Route path="/likedlist" element={<LikedList />} />
+            <Route path="/setting" element={<Setting />} />
+          </Routes>
+        </Center>
+      </BrowserRouter>
+    );
+  }
+}
 export default App;
