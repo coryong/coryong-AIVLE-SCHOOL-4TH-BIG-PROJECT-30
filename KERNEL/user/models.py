@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 class UserManager(BaseUserManager):
     # 일반 user 생성
-    def create_user(self, email, nickname, name, password=None):
+    def create_user(self, email, nickname, name, cover_letter=None, occupation=None, password=None):
         if not email:
             raise ValueError('must have user email')
         if not nickname:
@@ -13,7 +13,9 @@ class UserManager(BaseUserManager):
         user = self.model(
             email = self.normalize_email(email),
             nickname = nickname,
-            name = name
+            name = name,
+            cover_letter = cover_letter,  # 자기소개서 추가
+            occupation = occupation       # 선호 직업 추가
         )
         user.set_password(password)
         user.save(using=self._db)
@@ -36,7 +38,8 @@ class User(AbstractBaseUser):
     email = models.EmailField(default='', max_length=100, null=False, blank=False, unique=True)
     nickname = models.CharField(default='', max_length=100, null=False, blank=False, unique=True)
     name = models.CharField(default='', max_length=100, null=False, blank=False)
-    
+    cover_letter = models.TextField(default='', blank=True, null=True)  # 자기소개서 추가
+    occupation = models.CharField(default='', max_length=100, blank=True, null=True)  # 선호 직업 추가
     # User 모델의 필수 field
     is_active = models.BooleanField(default=True)    
     is_admin = models.BooleanField(default=False)

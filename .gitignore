@@ -11,3 +11,5 @@ db.sqlite3
 db.sqlite3-journal
 media
 my_settigs.py
+post/migrations/
+user/migrations/
