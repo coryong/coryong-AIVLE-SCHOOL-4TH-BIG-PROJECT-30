@@ -1,0 +1,21 @@
+.job-listing {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .job-icon img {
+    border-radius: 50%;
+    /* Adjust width and height as needed */
+  }
+  
+  .job-info {
+    margin-left: 1rem;
+  }
+  
+  /* Add additional styling as needed */
+  
