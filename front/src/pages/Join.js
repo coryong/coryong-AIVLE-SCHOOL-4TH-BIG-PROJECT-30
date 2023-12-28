@@ -19,7 +19,12 @@ function Register() {
         nickname: '',
         email: '',
         name: '',
-        password: ''
+        password: '',
+        firstName: '',
+        lastName: '',
+        occupation: '',
+        TecStacks: '',
+        coverletter: ''
     });
 
     const navigate = useNavigate();

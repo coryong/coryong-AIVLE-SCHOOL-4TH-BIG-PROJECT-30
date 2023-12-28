@@ -70,10 +70,28 @@ const PostView = ({ history, match }) => {
   };
 
   const submitComment = () => {
-    console.log("Submitting comment:", comment);
-    setComment(''); 
-  };
+    if (comment.trim() === '') {
+        alert('Comment cannot be empty');
+        return;
+    }
 
+    axios.post(`http://localhost:8000/post/comment`, {
+        postId: no, // Assuming 'no' is your post ID
+        body: comment
+    })
+    .then(response => {
+        alert('Comment submitted successfully');
+        // Update your component state to reflect the new comment
+        // This might involve fetching the post data again or updating the local state
+    })
+    .catch(error => {
+        console.error('Error submitting comment:', error.response ? error.response.data : error);
+        alert('Failed to submit the comment');
+    })
+    .finally(() => {
+        setComment(''); // Clear the comment field
+    });
+  };
 
   const [comment, setComment] = useState('');
 
