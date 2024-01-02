@@ -1,7 +1,7 @@
 
 from django.shortcuts import render
-from .serializers import UserSerializer, TechnologyStackSerializer, OccupationSerializer, EnvSerializer
-from .models import User, TechnologyStack, Occupation, Env
+from .serializers import UserSerializer, TechnologyStackSerializer, OccupationSerializer, EnvSerializer, CrawSerializer
+from .models import User, TechnologyStack, Occupation, Env, Crawling
 from rest_framework import generics, viewsets
  
 # 회원가입
@@ -40,3 +40,11 @@ class EnvViewSet(viewsets.ModelViewSet):
  
     def perform_create(self, serializer):
         serializer.save(user = self.request.user)
+
+# 크롤링       
+class CrawViewSet(viewsets.ModelViewSet):
+    queryset = Crawling.objects.all()
+    serializer_class = CrawSerializer
+ 
+    def perform_create(self, serializer):
+        serializer.save(user = self.request.user)  

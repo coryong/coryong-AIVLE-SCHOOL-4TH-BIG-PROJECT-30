@@ -3,7 +3,19 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import SidebarItem from "./SidebarItem";
 import profile from "../../assets/profile1.png";
+import '../../App.css';
+const LinkStyle = {
+  color: "gray",
+  textDecoration: "none",
+  fontFamily: 'SBAggroB', // 글꼴 적용
+  fontSize: '22px'
+};
 
+const ActiveLinkStyle = {
+  color: "black",
+  fontFamily: 'SBAggroB', // 글꼴 적용
+  fontSize: '22px'
+};
 const Side = styled.div`
   display: flex;
   border-right: 1px solid #e0e0e0;
@@ -22,22 +34,14 @@ const Menu = styled.div`
   display: flex;
   flex-direction: column;
 `
-const LinkStyle = {
-    color: "gray",
-    textDecoration: "none"
-  };
-  
-const ActiveLinkStyle = {
-    color: "black"
-  };
-  
+
 
 function Sidebar() {
   const menus = [
     { name: "나만의 만다르트", path: "/man" },
     { name: "추천 시스템", path: "/mylist" },
     { name: "공모전 게시판", path: "/recommend" },
-    { name: "잡다 정보 게시판", path: "/post" },
+    { name: "커뮤니티 게시판", path: "/post" },
     { name: "내 정보", path: "/setting"}
   ];
   return (

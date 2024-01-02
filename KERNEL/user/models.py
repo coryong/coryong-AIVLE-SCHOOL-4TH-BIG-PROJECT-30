@@ -102,3 +102,14 @@ class Env(models.Model):
 
     def __str__(self):
         return self.env_name
+    
+class Crawling(models.Model):
+    id = models.AutoField(primary_key=True, null=False, blank=False) 
+    title = models.CharField(max_length=100)
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    body = models.TextField()
+    image = models.ImageField(upload_to='images/')
+    interested_users = models.ManyToManyField(User, related_name='interested_crawlings')
+    
+    def __str__(self):
+        return self.title
