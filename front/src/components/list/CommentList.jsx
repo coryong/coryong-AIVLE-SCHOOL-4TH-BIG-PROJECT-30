@@ -23,10 +23,10 @@ function CommentList(props) {
         <Wrapper>
             {safeComments.map((comment, index) => {
                 return (
-                    <CommentListItem
-                        key={comment.id}
-                        comment={comment}
-                    />
+                    <div key={comment.id}>
+                        {/* Render individual comment items */}
+                    <p>{comment.user}: {comment.comment}</p>
+                    </div>
                 );
             })}
         </Wrapper>

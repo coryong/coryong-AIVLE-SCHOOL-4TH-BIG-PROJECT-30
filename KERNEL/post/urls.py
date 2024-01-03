@@ -6,5 +6,6 @@ router = DefaultRouter()
 router.register('post', PostViewSet)
 router.register('comment', CommentViewSet, basename='comment')
 urlpatterns =[
-    path('', include(router.urls))
+    path('', include(router.urls)),
+  
 ]

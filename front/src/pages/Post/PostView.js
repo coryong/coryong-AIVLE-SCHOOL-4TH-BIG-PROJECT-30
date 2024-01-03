@@ -75,8 +75,10 @@ const PostView = ({ history, match }) => {
   const [editTitle, setEditTitle] = useState(''); // 게시물 제목
   const [isEditing, setIsEditing] = useState(false);  // 편집 모드 상태
  
- 
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState('');
   const navigate = useNavigate();
+
  
   const yourAuthToken = localStorage.getItem('token');
   const getCookieValue = (name) => (
@@ -92,6 +94,7 @@ const PostView = ({ history, match }) => {
     } else {
       setCurrentUsername(nickname);
     }
+    // 게시글 데이터 가져오기
     const headers = {
       'Authorization': `Bearer ${yourAuthToken}`  // 인증 헤더 설정
     };
@@ -103,8 +106,40 @@ const PostView = ({ history, match }) => {
         console.error("Error fetching data: ", error);
         setData(null); // In case of error, set data to null
       });
+    // 댓글 데이터 가져오기
+    axios.get(`http://localhost:8000/post/comment/`)
+      .then(response => {
+        const allComments = response.data;
+        const commentsForPost = allComments.filter(c => parseInt(c.post) === parseInt(no));  // post ID가 no와 일치하는 댓글만 필터링
+        setComments(commentsForPost);
+      })
+      .catch(error => {
+        console.error("Error fetching data: ", error);
+        // In case of error, set data to null
+      });
   }, [no, yourAuthToken]);
- 
+  
+
+  const submitComment = () => {
+    const commentData = {
+        comment: newComment,
+        user: currentUsername,
+        post: no,
+        // 필요한 다른 데이터
+    };
+    axios.post(`http://localhost:8000/post/comment/`, commentData,{
+      headers: {
+        'Authorization': `Bearer ${yourAuthToken}`
+      }
+    })
+    .then(response => {
+      const updatedComments = Array.isArray(comments) ? [...comments, response.data] : [response.data];
+      setComments(updatedComments);  // 댓글 목록 업데이트
+      setNewComment('');  // 입력 필드 초기화
+    })
+    .catch(error => console.error("Error posting comment: ", error));
+};
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toISOString().split('T')[0]; // Formats the date to 'YYYY-MM-DD'
@@ -158,13 +193,10 @@ const PostView = ({ history, match }) => {
     setIsEditing(false);  // 편집 모드 비활성화
   };
  
-  const submitComment = () => {
-    console.log("Submitting comment:", comment);
-    setComment('');
-  };
  
  
-  const [comment, setComment] = useState('');
+ 
+  
  
   return (
     <>
@@ -217,16 +249,16 @@ const PostView = ({ history, match }) => {
               </div>
  
               <CommentLabel>댓글</CommentLabel>
-              <CommentList comments={data ? data.comment : []} />
+              <CommentList comments={Array.isArray(comments) ? comments : []}/>
  
               <input
                   height={40}
-                  value={comment}
+                  value={newComment}
                   onChange={(event) => {
-                      setComment(event.target.value);
+                      setNewComment(event.target.value);
                   }}
               />
-              <Button title='댓글' onClick={submitComment} data={data} />
+              <Button title='댓글' onClick={submitComment}  />
             </>
           ) : '해당 게시글을 찾을 수 없습니다.'
         }
