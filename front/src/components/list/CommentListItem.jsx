@@ -25,6 +25,7 @@ const ContentText = styled.p`
 function CommentListItem(props) {
     const { comment } = props;
 
+    
     return (
         <Wrapper>
             <ContentText>{comment.content}</ContentText>
