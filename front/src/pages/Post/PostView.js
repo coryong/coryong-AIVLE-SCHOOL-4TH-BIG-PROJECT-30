@@ -226,21 +226,21 @@ const PostView = ({ history, match }) => {
                       setComment(event.target.value);
                   }}
               />
-              <button title='댓글' onClick={submitComment} data={data} />
+              <Button title='댓글' onClick={submitComment} data={data} />
             </>
           ) : '해당 게시글을 찾을 수 없습니다.'
         }
       </Container>
     </Wrapper>
-    <button className="post-view-go-list-btn" onClick={() => navigate(-1)}>목록으로 돌아가기</button>
+    <Button title='뒤로' onClick={() => navigate(-1)} data={data}/>
     {data && currentUsername === data.user && (
       <>
         {!isEditing && (
-          <StyledButton onClick={enableEdit}>수정</StyledButton>
+          <Button title='수정' onClick={enableEdit} data={data}/>
         )}
-       
+
         {isEditing && (
-          <StyledButton onClick={confirmEdit}>수정 완료</StyledButton>
+          <Button title='수정완료'  onClick={confirmEdit} data={data}/>
         )}
         <Button title='삭제' onClick={deletePost} data={data}/>
       </>

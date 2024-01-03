@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ImgMediaCard from './Mediacard';
 
+
 const Mylist = () => {
     const [recommendations, setRecommendations] = useState([]);
 
@@ -30,25 +31,35 @@ const Mylist = () => {
         }
     };
 
+    const CardContainer = ({ children }) => {
+        return (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '60px', margin: '20px' }}>
+            {children}
+          </div>
+        );
+    };
+
     return (
         <div>
-            <h2>Recommended for You</h2>
-            <button onClick={fetchRecommendations}>Get Recommendations</button>
-            {recommendations.length > 0 ? (
-                recommendations.map((recommendation, index) => (
+        <h2>Recommended for You</h2>
+        <button onClick={fetchRecommendations}>Get Recommendations</button>
+        {recommendations.length > 0 ? (
+            <CardContainer> {/* Use CardContainer here */}
+                {recommendations.map((recommendation, index) => (
                     <ImgMediaCard
                         key={index}
                         title={`제목: ${recommendation.title}`}
                         text={`설명: ${recommendation.Exp_require}`}
-                        buttonText="Learn More"
-                        // imagePath and other properties can be added based on additional details you might want to display
+                        buttonText="More"
+                        imagePath="src/assets/to/team1.png"
                     />
-                ))
-            ) : (
-                <p>No recommendations available</p>
-            )}
-        </div>
-    );
+                ))}
+            </CardContainer>
+        ) : (
+            <p>No recommendations available</p>
+        )}
+    </div>
+  );
 };
 
 export default Mylist;

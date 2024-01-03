@@ -6,7 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-const ImgMediaCard = ({ title, text, buttonText, imagePath }) => {
+const MediaCard = ({ title, text, buttonText, imagePath }) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
       {imagePath && (
@@ -32,4 +32,4 @@ const ImgMediaCard = ({ title, text, buttonText, imagePath }) => {
   );
 };
 
-export default ImgMediaCard;
+export default MediaCard;
