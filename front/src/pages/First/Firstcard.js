@@ -17,18 +17,26 @@ const ImgMediaCard = ({ id, title, text, imagePath, likeStatus }) => {
   console.log('likeStatus:', likeStatus);
   console.log('userId:', id);
   const userId = getCookieValue('nickname'); // 쿠키에서 userId 가져오기
-  const [liked, setLiked] = useState(likeStatus.includes(userId)); // userId는 현재 로그인한 사용자의 ID
+  const [liked, setLiked] = useState(likeStatus && likeStatus.includes(userId)); // userId는 현재 로그인한 사용자의 ID
 
   const handleLike = async () => {
+    console.log("Current userId:", userId); // 현재 로그인한 사용자 ID 출력
     try {
-      const response = await fetch(`http://127.0.0.1:8000/crawling/${id}/toggle_like/`, {
-        method: 'POST', // 메소드 추가
+      const response = await fetch(`http://127.0.0.1:8000/crawling/like/`, {
+        method: 'POST',
         headers: {
-          'Authorization' : `Bearer ${yourAuthToken}`
+          'Authorization' : `Bearer ${yourAuthToken}`,
+          'Content-Type': 'application/json'
         },
+        body: JSON.stringify({
+          user: Number(userId), // 현재 로그인한 사용자 이름, 매번 캐시비우기 및 강력새로고침을 해야하나..
+          crawling: id  // 좋아요를 누른 게시물의 id
+        })
       });
+  
       if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
+        const errorMessage = await response.text();
+        throw new Error(`Error: ${response.status}, Message: ${errorMessage}`);
       }
       const data = await response.json(); // 서버 응답 처리
       setLiked(data.liked); // 예시: 서버에서 'liked' 상태를 응답으로 보내줄 경우
