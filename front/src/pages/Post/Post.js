@@ -8,7 +8,7 @@ import '../../components/table/CommonTable.css';
 import Button from '../../pages/ui/Button';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import './Post.css';
+
  
 const Post = () => {
   const [posts, setPosts] = useState([]);
@@ -34,7 +34,7 @@ const Post = () => {
   };
   return (
     <>
-      <div className="board-title">Board list</div>
+      <div className="board-title">게시판</div>
       <CommonTable headersName={['글번호', '제목', '등록일','작성자']}>
         {posts.map((post, index) => (
           <CommonTableRow key={post.id}>

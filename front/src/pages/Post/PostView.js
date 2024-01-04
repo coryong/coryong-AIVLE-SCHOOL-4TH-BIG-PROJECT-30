@@ -112,21 +112,6 @@ const PostView = ({ history, match }) => {
     .catch(error => console.error("Error posting comment: ", error));
   };
 
-  const handleDeleteComment = (commentId) => {//댓글 삭제 함수
-    const headers = {
-      'Authorization': `Bearer ${yourAuthToken}`
-    };
-  
-    axios.delete(`http://localhost:8000/post/comment/${commentId}`, { headers })
-      .then(() => {
-        const updatedComments = comments.filter((comment) => comment.id !== commentId);
-        setComments(updatedComments);
-        setData(null);
-      })
-      .catch((error) => {
-        console.error('Error deleting comment:', error);
-      });
-  };
  
   const formatDate = (dateString) => {
     const date = new Date(dateString);
