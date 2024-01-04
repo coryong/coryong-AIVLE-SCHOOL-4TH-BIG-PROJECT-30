@@ -12,7 +12,9 @@ import './Post.css';
  
 const Post = () => {
   const [posts, setPosts] = useState([]);
- 
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 10; // Set the number of posts per page
+
   const navigate = useNavigate();
  
   useEffect(() => {
@@ -24,10 +26,22 @@ const Post = () => {
         console.error(error);
       });
   }, []);
- 
+
+  const pageCount = Math.ceil(posts.length / postsPerPage);
+
+  // Get current posts
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
   const navigateToCreatePost = () => {
     navigate('/create-post');
   };
+
+  const paginate = (event, value) => {
+    setCurrentPage(value);
+  };
+  
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toISOString().split('T')[0]; // Formats the date to 'YYYY-MM-DD'
@@ -35,23 +49,29 @@ const Post = () => {
   return (
     <>
       <div className="board-title">Board list</div>
-      <CommonTable headersName={['글번호', '제목', '등록일','작성자']}>
-        {posts.map((post, index) => (
-          <CommonTableRow key={post.id}>
-            <CommonTableColumn>{post.id}</CommonTableColumn>
-            <CommonTableColumn>
-              <Link to={`/post/post/${post.id}`}>{post.title}</Link>
-            </CommonTableColumn>
-            <CommonTableColumn>{formatDate(post.created_at)}</CommonTableColumn>
-            <CommonTableColumn>{post.user}</CommonTableColumn>
-          </CommonTableRow>
-        ))}
-      </CommonTable>
+  <CommonTable headersName={['글번호', '제목', '등록일', '작성자']}>
+    {currentPosts.map((post, index) => ( // 이 부분을 'posts'에서 'currentPosts'로 변경
+      <CommonTableRow key={post.id}>
+        <CommonTableColumn>{post.id}</CommonTableColumn>
+        <CommonTableColumn>
+          <Link to={`/post/post/${post.id}`}>{post.title}</Link>
+        </CommonTableColumn>
+        <CommonTableColumn>{formatDate(post.created_at)}</CommonTableColumn>
+        <CommonTableColumn>{post.user}</CommonTableColumn>
+      </CommonTableRow>
+    ))}
+  </CommonTable>
       <div className="create-post-container">
       <Button title='Create New Post' onClick={navigateToCreatePost}/>
       </div>
       <Stack spacing={2} alignItems="center" justifyContent="center">
-        <Pagination count={10} variant="outlined" shape="rounded" />
+        <Pagination
+          count={pageCount} // Set the count to the number of pages
+          page={currentPage}
+          onChange={paginate}
+          variant="outlined"
+          shape="rounded"
+        />
       </Stack>
     </>
   );
