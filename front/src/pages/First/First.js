@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ImgMediaCard from './Firstcard';
 import { useAuth } from '../../context/AuthContext'; // AuthContext의 위치에 따라 경로를 적절히 수정해주세요.
+import { Box } from '@mui/material'; // 'Box'를 여기서 임포트합니다.
 
 const Mylist = () => {
     const { isLoggedIn} = useAuth(); // 로그인 상태와 토큰을 가져옵니다.
@@ -33,29 +34,37 @@ const Mylist = () => {
 
     return (
         <div>
-            {isLoggedIn ? ( // 로그인 상태에 따라 다른 컨텐츠를 보여줍니다.
-                <>
-                    <h2>Recommended for You</h2>
-                    {recommendations.length > 0 ? (
-                        recommendations.map((recommendation, index) => (
-                            <ImgMediaCard
-                                key={index}
-                                id={recommendation.id}
-                                title={`제목: ${recommendation.title}`}
-                                text={`설명: ${recommendation.body}`} // body로 변경
-                                imagePath={recommendation.image}
-                                likeStatus={recommendation.like_status} // '좋아요' 상태 추가
-                            />
-                        ))
-                    ) : (
-                        <p>No recommendations available</p>
-                    )}
-                </>
-            ) : (
-                <p>로그인이 필요합니다.</p>
-            )}
+          {isLoggedIn ? (
+            <>
+              <h2>Recommended for You</h2>
+              <Box sx={{ 
+                display: 'flex', 
+                flexWrap: 'wrap', // 여기에 flex-wrap을 적용합니다.
+                justifyContent: 'center', // 중앙 정렬
+                gap: 2 // 카드 사이의 간격을 줍니다.
+              }}>
+                {recommendations.length > 0 ? (
+                  recommendations.map((recommendation, index) => (
+                    <ImgMediaCard
+                      key={index}
+                      id={recommendation.id}
+                      title={`제목: ${recommendation.title}`}
+                      text={`설명: ${recommendation.body}`} // body로 변경
+                      imagePath={recommendation.image}
+                      likeStatus={recommendation.like_status} // '좋아요' 상태 추가
+                      url={recommendation.url} // 'url' prop 추가
+                    />
+                  ))
+                ) : (
+                  <p>No recommendations available</p>
+                )}
+              </Box>
+            </>
+          ) : (
+            <p>로그인이 필요합니다.</p>
+          )}
         </div>
-    );
-};
-
-export default Mylist;
+      );
+    };
+    
+    export default Mylist;

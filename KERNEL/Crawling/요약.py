@@ -37,7 +37,7 @@ def ex_tag(sid, page):
 # 링크 수집 및 중복 제거 함수
 def re_tag(sid):
     re_lst = []
-    for i in tqdm(range(100)):  # 수정된 부분
+    for i in tqdm(range(10)):  # 수정된 부분
         lst = ex_tag(sid, i+1)
         re_lst.extend(lst)
     return list(set(re_lst))

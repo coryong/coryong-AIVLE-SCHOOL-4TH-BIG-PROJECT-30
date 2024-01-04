@@ -6,6 +6,10 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { Box } from '@mui/material';
+
+
+
 const getCookieValue = (name) => (
   document.cookie.split('; ').find(row => row.startsWith(name + '='))
   ?.split('=')[1]
@@ -13,11 +17,15 @@ const getCookieValue = (name) => (
 
 const yourAuthToken = localStorage.getItem('token');
 
-const ImgMediaCard = ({ id, title, text, imagePath, likeStatus }) => {
+const ImgMediaCard = ({ id, title, text, imagePath, likeStatus, url }) => {
   console.log('likeStatus:', likeStatus);
   console.log('userId:', id);
   const userId = getCookieValue('nickname'); // 쿠키에서 userId 가져오기
   const [liked, setLiked] = useState(likeStatus && likeStatus.includes(userId)); // userId는 현재 로그인한 사용자의 ID
+
+  // 텍스트를 요약해서 표시할 길이를 설정합니다.
+  const summaryLength = 200; // 예시로 200글자로 설정합니다.
+  const [isTextTooLong, setIsTextTooLong] = useState(text.length > summaryLength);
 
   const handleLike = async () => {
     console.log("Current userId:", userId); // 현재 로그인한 사용자 ID 출력
@@ -46,24 +54,44 @@ const ImgMediaCard = ({ id, title, text, imagePath, likeStatus }) => {
   };
   
 
+  // 'MORE' 버튼 클릭 핸들러
+  const handleReadMore = () => {
+    window.location.href = url; // URL로 리디렉션
+  };
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      {imagePath && <CardMedia component="img" alt={title} height="140" image={imagePath} />}
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {title}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {text}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small" onClick={handleLike}>
-          {liked ? <FavoriteIcon color="error" /> : <FavoriteIcon />}
-          LIKE
-        </Button>
-      </CardActions>
-    </Card>
+    <Box sx={{ display: 'flex', justifyContent: 'center', m: 2 }}>
+      <Card sx={{ maxWidth: 345, boxShadow: 3, display: 'flex', flexDirection: 'column', height: '100%' }}>
+        {imagePath && (
+          <CardMedia
+            component="img"
+            alt={title}
+            height="140"
+            image={imagePath}
+            sx={{ objectFit: 'cover' }}
+          />
+        )}
+        <CardContent sx={{ flexGrow: 1 }}>
+          <Typography gutterBottom variant="h5" component="div">
+            {title}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {isTextTooLong ? `${text.substring(0, summaryLength)}...` : text}
+          </Typography>
+        </CardContent>
+        <CardActions sx={{ justifyContent: 'center' }}>
+          <Button size="small" onClick={handleLike} sx={{ color: liked ? 'error.main' : 'primary.main' }}>
+            <FavoriteIcon />
+            LIKE
+          </Button>
+          {isTextTooLong && (
+            <Button size="small" onClick={handleReadMore}>
+              MORE
+            </Button>
+          )}
+        </CardActions>
+      </Card>
+    </Box>
   );
 };
 
