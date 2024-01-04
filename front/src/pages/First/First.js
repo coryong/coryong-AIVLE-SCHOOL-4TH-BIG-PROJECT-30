@@ -48,8 +48,8 @@ const Mylist = () => {
                     <ImgMediaCard
                       key={index}
                       id={recommendation.id}
-                      title={`제목: ${recommendation.title}`}
-                      text={`설명: ${recommendation.body}`} // body로 변경
+                      title={`${recommendation.title}`}
+                      text={` ${recommendation.body}`} // body로 변경
                       imagePath={recommendation.image}
                       likeStatus={recommendation.like_status} // '좋아요' 상태 추가
                       url={recommendation.url} // 'url' prop 추가

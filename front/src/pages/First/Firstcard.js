@@ -84,11 +84,9 @@ const ImgMediaCard = ({ id, title, text, imagePath, likeStatus, url }) => {
             <FavoriteIcon />
             LIKE
           </Button>
-          {isTextTooLong && (
             <Button size="small" onClick={handleReadMore}>
               MORE
             </Button>
-          )}
         </CardActions>
       </Card>
     </Box>

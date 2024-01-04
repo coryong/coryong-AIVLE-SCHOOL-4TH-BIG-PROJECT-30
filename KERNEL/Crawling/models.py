@@ -4,7 +4,7 @@ from user.models import User
 class Crawling(models.Model):
     id = models.AutoField(primary_key=True, null=False, blank=False) 
     title = models.CharField(max_length=100)
-    body = models.TextField()
+    body = models.TextField(null=True)
     image = models.URLField(null=True, blank=True)
     url = models.URLField(null=True)
     like_count = models.PositiveIntegerField(default=0)
