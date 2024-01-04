@@ -3,7 +3,7 @@ import './Card.css';
 
 
 
-const Card = ({ title, text, buttonText, imagePath }) => {
+const Card = ({ title, text, imagePath }) => {
   return (
     <div className="card">
       <div className="card-image-wrapper">
@@ -14,7 +14,6 @@ const Card = ({ title, text, buttonText, imagePath }) => {
         <p className="card-text">
           {text} {/* 텍스트를 props에서 받음 */}
         </p>
-        <button className="card-button">{buttonText}</button> {/* 버튼 텍스트를 props에서 받음 */}
       </div>
       
     </div>
