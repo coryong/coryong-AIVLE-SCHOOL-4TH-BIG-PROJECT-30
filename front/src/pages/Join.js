@@ -2,10 +2,9 @@ import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Select, MenuItem, InputLabel, FormControl, Box, Container, Typography } from '@mui/material';
-// import { useNavigate } from 'react-router-dom';
-// import { TextField, Button, Select, MenuItem, InputLabel, FormControl, Box, Container, Typography } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
- 
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Avatar from '@mui/material/Avatar';
  
 function Register() {
     const [formData, setFormData] = useState({
@@ -170,6 +169,9 @@ function Register() {
         <CssBaseline />
         <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <Typography component="h1" variant="h5">Register</Typography>
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                <LockOutlinedIcon /> // 자물쇠 이모지
+            </Avatar>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
                 <TextField
                     margin="normal"

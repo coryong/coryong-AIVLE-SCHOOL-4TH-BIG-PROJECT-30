@@ -38,7 +38,7 @@ const Post = () => {
       <CommonTable headersName={['글번호', '제목', '등록일','작성자']}>
         {posts.map((post, index) => (
           <CommonTableRow key={post.id}>
-            <CommonTableColumn>{post.id}</CommonTableColumn>
+            <CommonTableColumn>{index+1}</CommonTableColumn>
             <CommonTableColumn>
               <Link to={`/post/post/${post.id}`}>{post.title}</Link>
             </CommonTableColumn>
@@ -48,7 +48,7 @@ const Post = () => {
         ))}
       </CommonTable>
       <div className="create-post-container">
-      <Button title='Create New Post' onClick={navigateToCreatePost}/>
+      <Button title='글쓰기' onClick={navigateToCreatePost}/>
       </div>
       <Stack spacing={2} alignItems="center" justifyContent="center">
         <Pagination count={10} variant="outlined" shape="rounded" />

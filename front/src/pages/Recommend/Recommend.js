@@ -34,7 +34,7 @@ const Recommend = () => {
       <CommonTable headersName={['글번호', '제목', '작성자']}>
         {posts.map((post, index) => (
           <CommonTableRow key={post.id}>
-            <CommonTableColumn>{post.id}</CommonTableColumn>
+            <CommonTableColumn>{index+1}</CommonTableColumn>
             <CommonTableColumn>
               <Link to={`/recommend/Recommend/${post.id}`}>{post.title}</Link>
             </CommonTableColumn>

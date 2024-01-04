@@ -14,8 +14,9 @@ const ImgMediaCard = ({ title, text, buttonText, imagePath, onMoreClick }) => {
         <CardMedia
           component="img"
           alt={title}
-          height="140"
+          height="200px"
           image={imagePath}
+          width= "100%"
         />
       )}
       <CardContent>

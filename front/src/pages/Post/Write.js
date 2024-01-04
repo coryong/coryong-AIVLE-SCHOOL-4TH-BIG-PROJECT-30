@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../../pages/ui/Button';
 
-import './Post.css';
- 
  
  
 const Wrapper = styled.div`

@@ -69,7 +69,7 @@ const Home = () => {
           imagePath={chatbotImage} 
         />
         <Card 
-          title="취업" 
+          title="추천시스템" 
           text="하이" 
           imagePath={employmentImage} 
         />

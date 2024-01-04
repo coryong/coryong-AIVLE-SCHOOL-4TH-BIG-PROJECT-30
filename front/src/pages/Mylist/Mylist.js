@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ImgMediaCard from './Mediacard';
 import { useNavigate } from 'react-router-dom'; // 추가
  
 const Mylist = () => {
     const [recommendations, setRecommendations] = useState([]);
     const navigate = useNavigate(); // 추가
+
     const getCookieValue = (name) => (
         document.cookie.split('; ').find(row => row.startsWith(name + '='))
         ?.split('=')[1]
@@ -32,19 +33,26 @@ const Mylist = () => {
             console.error('Failed to fetch recommendations:', error);
         }
     };
- 
+    useEffect(() => {//버튼을 누르지않아도 바로 추천시스템이 보이는 기능
+        fetchRecommendations();
+    }, []);
+
     const CardContainer = ({ children }) => {
         return (
-<div style={{ display: 'flex', flexWrap: 'wrap', gap: '50px', margin: '50px' }}>
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap', // Ensures that the cards will wrap to the next line if there's not enough space
+            justifyContent: 'center', // Centers the cards within the container
+            gap: '16px' // Adds a 2px gap between cards
+          }}>
             {children}
-</div>
+          </div>
         );
-    };
+      };
  
     return (
 <div>
 <h2>Recommended for You</h2>
-<button onClick={fetchRecommendations}>Get Recommendations</button>
         {recommendations.length > 0 ? (
 <CardContainer> {/* Use CardContainer here */}
                 {recommendations.map((recommendation, index) => (

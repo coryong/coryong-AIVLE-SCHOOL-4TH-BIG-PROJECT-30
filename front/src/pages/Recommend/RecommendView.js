@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-import './Post.css';
 import Button from '../../pages/ui/Button';
 import styled from 'styled-components';
 
@@ -17,9 +16,40 @@ const Wrapper = styled.div`
 const Container = styled.div`
     width: 100%;
     max-width: 720px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
     :not(:last-child) {
         margin-bottom: 16px;
+    }
+
+    .post-view-row {
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: center; // Centering content horizontally
+        align-items: center; // Centering content vertically
+        text-align: center; // Center-aligning text
+
+        label {
+            font-weight: bold;
+            color: #333;
+            margin-right: 10px;
+            flex: 0 0 50%; // Setting label width
+        }
+
+        div, label:last-child {
+            flex: 0 0 50%; // Setting content width
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 4px;
+            display: block; // For centering the image
+            margin: 0 auto; // Centering the image horizontally
+        }
     }
 `;
 
@@ -149,7 +179,7 @@ const RecommendView = ({ history, match }) => {
         }
       </Container>
     </Wrapper>
-    <button className="post-view-go-list-btn" onClick={() => navigate(-1)}>목록으로 돌아가기</button>
+    <Button title='뒤로' onClick={() => navigate(-1)} data={data}/>
     <Button title='Delete Post' onClick={deletePost} />
     </>
     
