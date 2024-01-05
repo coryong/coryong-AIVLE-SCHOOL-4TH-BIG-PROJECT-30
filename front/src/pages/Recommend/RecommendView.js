@@ -149,8 +149,8 @@ const RecommendView = ({ history, match }) => {
         }
       </Container>
     </Wrapper>
-    <button className="post-view-go-list-btn" onClick={() => navigate(-1)}>목록으로 돌아가기</button>
-    <Button title='Delete Post' onClick={deletePost} />
+    <Button title='목록' onClick={() => navigate(-1)}/>
+    <Button title='삭제' onClick={deletePost} />
     </>
     
   );

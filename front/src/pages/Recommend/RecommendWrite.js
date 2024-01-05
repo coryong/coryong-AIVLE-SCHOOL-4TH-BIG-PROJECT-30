@@ -28,13 +28,12 @@ max-width: 720px;
     margin-bottom: 16px;
 }
 `;
-
 // TitleField 컴포넌트
 const TitleField = ({ title, handleInputChange }) => (
 <Grid item xs={12}>
   <TextField
     fullWidth
-    label="Title"
+    label="제목"
     id="Title"
     type="text"
     name="title"
@@ -48,7 +47,7 @@ const TitleField = ({ title, handleInputChange }) => (
 const CategorySelect = ({ categories, selectedCategories, handleCategoryChange }) => (
 <Grid item xs={12}>
   <FormControl fullWidth variant="outlined">
-    <InputLabel id="categories-label">Categories</InputLabel>
+    <InputLabel id="categories-label">지원분야</InputLabel>
     <Select
       labelId="categories-label"
       id="Categories"
@@ -75,7 +74,7 @@ const TechnologyStackSelect = ({ occupationName, selectedStacks, handleStackChan
 <Grid item xs={12}>
   <h3>{occupationName} Required Skills</h3>{/* 직업 이름을 표시 */}
   <FormControl fullWidth variant="outlined">
-    <InputLabel id="technology-stacks-label">Required Skills</InputLabel>
+    <InputLabel id="technology-stacks-label">기술 스택</InputLabel>
     <Select
       labelId="technology-stacks-label"
       id="TechnologyStacks"
@@ -100,7 +99,7 @@ const TechnologyStackSelect = ({ occupationName, selectedStacks, handleStackChan
 const EnvSelect = ({ envs, selectedEnv, handleEnvChange }) => (
   <Grid item xs={12}>
     <FormControl fullWidth variant="outlined">
-      <InputLabel id="env-label">Work Environment</InputLabel>
+      <InputLabel id="env-label">선호 환경</InputLabel>
       <Select
         labelId="env-label"
         id="env"
@@ -257,14 +256,14 @@ useEffect(() => {
 return (
   <Wrapper>
     <Container>
-      <h1>Add a New Post</h1>
+      <h1>공모전/해커톤 참가자 모집</h1>
       <form onSubmit={addPost}>
         <Grid container spacing={2}>
           <TitleField title={newPost.title} handleInputChange={handleInputChange} />
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="cate"
+              label="모집분야 인원"
               id="cate"
               type="text"
               name="cate"
@@ -295,7 +294,7 @@ return (
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Experience Requirements"
+              label="경력 요구사항"
               id="Exp_require"
               type="text"
               name="Exp_require"
@@ -306,7 +305,7 @@ return (
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Project Description"
+              label="프로젝트 설명"
               id="Project_Description"
               type="text"
               name="Project_Description"
@@ -323,8 +322,9 @@ return (
             />
           </Grid>
           </Grid>
+          <Grid item xs={12}>
         <Button title='Add Post' type="submit" />
-      </form>
+        </Grid></form>
     </Container>
   </Wrapper>
 );
