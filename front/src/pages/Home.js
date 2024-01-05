@@ -14,6 +14,7 @@ import team4 from '../assets/team4.png'; // Replace with your actual image path
 import team5 from '../assets/team5.png'; // Replace with your actual image path
 import team6 from '../assets/team6.png'; // Replace with your actual image path
 import team7 from '../assets/team7.png'; // Replace with your actual image path
+import { Container } from '@mui/material';
 
 // 배너 섹션 컴포넌트
 const BannerSection = () => {
@@ -53,31 +54,33 @@ const teamMembers = [
   
 const Home = () => {
   return (
-    <div>
-      <BannerSection bannerImage={'path-to-your-banner-image.jpg'} />
-      <div className="card-container">
-        <Card 
-          title="만다라트" 
-          text="하이만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트
-          만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트
-          만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트" 
-          imagePath={mandaratImage} 
-        />
-        <Card 
-          title="챗봇" 
-          text="하이" 
-          imagePath={chatbotImage} 
-        />
-        <Card 
-          title="취업" 
-          text="하이" 
-          imagePath={employmentImage} 
-        />
+    <Container fixed>
+      <div>
+        <BannerSection bannerImage={'path-to-your-banner-image.jpg'} />
+        <div className="card-container">
+          <Card 
+            title="만다라트" 
+            text="하이만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트
+            만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트
+            만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트만다라트" 
+            imagePath={mandaratImage} 
+          />
+          <Card 
+            title="챗봇" 
+            text="하이" 
+            imagePath={chatbotImage} 
+          />
+          <Card 
+            title="취업" 
+            text="하이" 
+            imagePath={employmentImage} 
+          />
+        </div>
+        <Slider {...settings} images={teamMembers.map(member => ({
+          content: <TeamMemberCard key={member.name} src={member.src} alt={member.alt} name={member.name} description={member.description} email={member.email} />
+        }))} />
       </div>
-      <Slider {...settings} images={teamMembers.map(member => ({
-        content: <TeamMemberCard key={member.name} src={member.src} alt={member.alt} name={member.name} description={member.description} email={member.email} />
-      }))} />
-    </div>
+    </Container>
   );
 };
 

@@ -13,21 +13,30 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 
 // Styled components
 const Wrapper = styled.div`
-padding: 16px;
-width: calc(100% - 32px);
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
+  padding: 16px;
+  width: calc(100% - 32px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f4f4f4; // Light background for the wrapper
+  min-height: 100vh; // Full viewport height
 `;
 
 const Container = styled.div`
-width: 100%;
-max-width: 720px;
-:not(:last-child) {
-    margin-bottom: 16px;
-}
+  width: 100%;
+  max-width: 720px;
+  background-color: white; // White background for the form container
+  padding: 20px;
+  border-radius: 8px; // Rounded corners
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); // Subtle shadow for depth
+  margin-bottom: 16px;
+
+  @media (max-width: 768px) {
+    margin: 0 10px; // Margin for smaller screens
+  }
 `;
+
 
 // TitleField 컴포넌트
 const TitleField = ({ title, handleInputChange }) => (
@@ -323,7 +332,7 @@ return (
             />
           </Grid>
           </Grid>
-        <Button title='Add Post' type="submit" />
+        <p><Button title='Add Post' type="submit" /></p>
       </form>
     </Container>
   </Wrapper>

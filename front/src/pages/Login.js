@@ -3,9 +3,7 @@ import React, { Component } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import TextField from '@mui/material/TextField';
-import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -69,7 +67,7 @@ class Login extends Component {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-              Sign in
+              로그인
         </Typography>
         <TextField label="ID" 
           required 
@@ -90,11 +88,6 @@ class Login extends Component {
           onChange={this.handleInputChange}
           autoComplete="current-password"
         />
-        <FormControlLabel
-          control={<Checkbox value="remember" 
-          color="primary" />}
-          label="Remember me"
-        />
         <Button
           type="submit" 
           fullWidth variant="contained" 
@@ -104,10 +97,9 @@ class Login extends Component {
         </Button>
         <Grid container>
           <Grid item xs>
-            <Link href="#">Forgot password? </Link>
           </Grid>
           <Grid item>
-            <Link href="Join">Sign Up</Link>
+            <Link href="Join">회원가입</Link>
           </Grid>
         </Grid>
       </Box>

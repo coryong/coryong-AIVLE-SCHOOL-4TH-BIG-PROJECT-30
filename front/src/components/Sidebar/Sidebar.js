@@ -6,21 +6,32 @@ import profile from "../../assets/profile1.png";
 
 const Side = styled.div`
   display: flex;
-  border-right: 1px solid #e0e0e0;
   flex-direction: column;
   align-items: center;
-  width: 20%;
+  width: 10%;
+  background-color: #444; /* Dark background */
+  color: white; /* Light text */
+  height: 100vh; /* Full viewport height */
+  font-family: 'Arial', sans-serif; /* Font similar to the image */
+  height: 700px;
+  margin: 10px;
+  gap: 10px;
+
 `
+
 const Profile = styled.img`
-  width: 150px;
-  height: 150px;
-  border-radius: 100%;
+  width: 100px; /* Smaller profile picture */
+  height: 100px; /* Smaller profile picture */
+  border-radius: 50%; /* Circular profile picture */
+  margin-top: 20px; /* Space from the top */
+  border: 3px solid #555; /* Border around the profile picture */
 `
 const Menu = styled.div`
   margin-top: 30px;
-  width: 200px;
+  width: 100%; /* Full width of the sidebar */
   display: flex;
   flex-direction: column;
+  align-items: flex-start; /* Align items to the left */
 `
 const LinkStyle = {
     color: "gray",

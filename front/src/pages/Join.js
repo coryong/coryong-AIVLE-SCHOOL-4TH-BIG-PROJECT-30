@@ -2,9 +2,9 @@ import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Select, MenuItem, InputLabel, FormControl, Box, Container, Typography } from '@mui/material';
-// import { useNavigate } from 'react-router-dom';
-// import { TextField, Button, Select, MenuItem, InputLabel, FormControl, Box, Container, Typography } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Avatar from '@mui/material/Avatar';
  
  
 function Register() {
@@ -169,60 +169,63 @@ function Register() {
     <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Typography component="h1" variant="h5">Register</Typography>
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">회원가입</Typography>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
                 <TextField
                     margin="normal"
                     required
                     fullWidth
                     name="nickname"
-                    label="Nickname"
+                    label="아이디"
                     type="text"
                     id="nickname"
                     value={formData.nickname}
                     onChange={handleChange}
-                    placeholder="Nickname"
+                    placeholder="아이디"
                 />
                 <TextField
                     margin="normal"
                     required
                     fullWidth
                     name="email"
-                    label="Email Address"
+                    label="이메일"
                     type="email"
                     id="email"
                     autoComplete="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="Email"
+                    placeholder="이메일"
                 />
                 <TextField
                     margin="normal"
                     required
                     fullWidth
                     name="name"
-                    label="Name"
+                    label="이름"
                     type="text"
                     id="name"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="Name"
+                    placeholder="이름"
                 />
                 <TextField
                     margin="normal"
                     required
                     fullWidth
                     name="password"
-                    label="Password"
+                    label="비밀번호"
                     type="password"
                     id="password"
                     autoComplete="current-password"
                     value={formData.password}
                     onChange={handleChange}
-                    placeholder="Password"
+                    placeholder="비밀번호"
                 />
                 <FormControl fullWidth margin="normal">
-                    <InputLabel id="occupation-label">Occupation</InputLabel>
+                    <InputLabel id="occupation-label">희망 직종</InputLabel>
                     <Select
                         labelId="occupation-label"
                         id="occupation"
@@ -253,7 +256,7 @@ function Register() {
                     </Select>
                 </FormControl>
                 <FormControl fullWidth margin="normal">
-                    <InputLabel id="env-label">Environment</InputLabel>
+                    <InputLabel id="env-label">선호 환경</InputLabel>
                     <Select
                         labelId="env-label"
                         id="env"
@@ -261,6 +264,7 @@ function Register() {
                         value={formData.env}
                         onChange={handleChange2}
                         label="Environment"
+                        
                     >
                         {env.map(env => (
                             <MenuItem key={env.id} value={env.id}>{env.env_name}</MenuItem>
